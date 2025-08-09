@@ -4,7 +4,6 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { Textarea } from "@/components/ui/textarea";
 import useAutoResizeTextarea from "@/hooks/use-auto-resize-textarea";
 import { cn } from "@/lib/utils";
-import PricingModal from "@/modules/pricing/views/ui/pricing-modal";
 import { ArrowUpIcon, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useAiChatInputState } from "../providers/input-provider";
