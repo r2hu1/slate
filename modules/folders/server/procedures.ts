@@ -1,7 +1,6 @@
 import { db } from "@/db/client";
 import {
   createTRPCRouter,
-  premiumProcedure,
   protectedProcedure,
 } from "@/trpc/init";
 import { desc, eq } from "drizzle-orm";
@@ -23,7 +22,7 @@ export const foldersRouter = createTRPCRouter({
       .orderBy(desc(folders.updatedAt));
     return currentFolders;
   }),
-  create: premiumProcedure("folder")
+  create: protectedProcedure
     .input(foldersSchema)
     .mutation(async ({ input, ctx }) => {
       const [createdFolder] = await db

@@ -89,11 +89,6 @@ export default function ChatInput({
     }
   };
 
-  const trpc = useTRPC();
-  const { data, isPending } = useQuery(
-    trpc.premium.getCurrentSubscription.queryOptions(),
-  );
-
   const placeHolder = {
     chat: "Hey what is meant by ...",
     build: "Write a film script with...",
@@ -132,7 +127,6 @@ export default function ChatInput({
             >
               Chat
             </Button>
-            {!isPending && data ? (
               <Button
                 variant={mode === "build" ? "default" : "secondary"}
                 onClick={() => {
@@ -143,19 +137,6 @@ export default function ChatInput({
               >
                 Build
               </Button>
-            ) : (
-              <PricingModal>
-                <Button
-                  variant={"secondary"}
-                  size="sm"
-                  className="cursor-pointer h-6 text-xs shadow-none"
-                  disabled={isPending}
-                >
-                  Build
-                </Button>
-              </PricingModal>
-            )}
-            {!isPending && data ? (
               <Button
                 variant={mode === "research" ? "default" : "secondary"}
                 onClick={() => {
@@ -166,18 +147,6 @@ export default function ChatInput({
               >
                 Research
               </Button>
-            ) : (
-              <PricingModal>
-                <Button
-                  variant={"secondary"}
-                  size="sm"
-                  className="cursor-pointer h-6 text-xs shadow-none"
-                  disabled={isPending}
-                >
-                  Research
-                </Button>
-              </PricingModal>
-            )}
           </div>
           <div className="flex items-center gap-2">
             <Button

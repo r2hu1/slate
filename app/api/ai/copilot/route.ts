@@ -3,22 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { appRouter } from "@/trpc/routers/_app";
 import { createTRPCContext } from "@/trpc/init";
 import { googleai } from "@/lib/google-ai";
-import { isSubscribed } from "@/lib/cache/premium";
 
 export async function POST(req: Request) {
   const { prompt: messages } = await req.json();
   if (!messages || messages.length === 0) {
     return NextResponse.json({ status: 200 });
-  }
-
-  const isPremium = await isSubscribed();
-  if (!isPremium) {
-    return NextResponse.json(
-      {
-        text: "",
-      },
-      { status: 200 },
-    );
   }
 
   const completion = await generateText({

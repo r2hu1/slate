@@ -6,7 +6,6 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./user";
-import Useage from "./useage";
 import { Folders } from "./folders";
 import DashboardNav from "./dashboard";
 import DashboardSidebarFooter from "./footer";
@@ -22,7 +21,6 @@ export function DashboardSidebar() {
         <Folders />
       </SidebarContent>
       <SidebarFooter>
-        <Useage />
         <DashboardSidebarFooter />
       </SidebarFooter>
       <SidebarRail />
