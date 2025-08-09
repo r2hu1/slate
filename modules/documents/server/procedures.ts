@@ -1,6 +1,5 @@
 import { db } from "@/db/client";
 import { documents, folders } from "@/db/schema";
-import { polarClient } from "@/lib/polar";
 import {
   createTRPCRouter,
   protectedProcedure,
