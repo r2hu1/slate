@@ -56,9 +56,6 @@ export default function CreateDocumentPopup({
           await queryClient.invalidateQueries(
             trpc.document.getAllByFolderId.queryOptions({ folderId }),
           );
-          await queryClient.invalidateQueries(
-            trpc.premium.getFreeUsage.queryOptions(),
-          );
         },
         onError: (error) => {
           toast.error(error.message);

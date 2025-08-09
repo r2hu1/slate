@@ -51,9 +51,6 @@ export default function DeleteFolderPopup({
             trpc.folder.getAll.queryOptions(),
           );
           await queryClient.invalidateQueries(
-            trpc.premium.getFreeUsage.queryOptions(),
-          );
-          await queryClient.invalidateQueries(
             trpc.folder.getRecent.queryOptions(),
           );
           await queryClient.invalidateQueries(

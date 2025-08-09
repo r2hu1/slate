@@ -37,9 +37,6 @@ export default function CreateDocumentInline({
             trpc.document.getAllByFolderId.queryOptions({ folderId }),
           );
           await queryClient.invalidateQueries(
-            trpc.premium.getFreeUsage.queryOptions(),
-          );
-          await queryClient.invalidateQueries(
             trpc.document.getRecent.queryOptions(),
           );
         },
