@@ -15,6 +15,7 @@ export const auth = betterAuth({
     "https://app.cavio.pro",
     "https://cavio.vercel.app",
     "https://cavio-development-v1.vercel.app",
+    "https://slate.rahul.eu.org"
   ],
   emailAndPassword: {
     enabled: true,
