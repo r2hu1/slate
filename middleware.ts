@@ -16,7 +16,11 @@ export async function middleware(request: NextRequest) {
 		!sessionCookie &&
 		!sessionDeProtectedRoutes.includes(request.nextUrl.pathname)
 	) {
-		await signOut();
+		try {
+			await signOut();
+		} catch {
+			// maybe loging error here
+		}
 		return NextResponse.redirect(new URL("/home", request.url));
 	}
 	return NextResponse.next();
