@@ -1,5 +1,6 @@
 import { getSessionCookie } from "better-auth/cookies";
 import { NextRequest, NextResponse } from "next/server";
+import { signOut } from "./lib/auth-client";
 
 export async function middleware(request: NextRequest) {
 	const sessionCookie = getSessionCookie(request);
@@ -15,6 +16,7 @@ export async function middleware(request: NextRequest) {
 		!sessionCookie &&
 		!sessionDeProtectedRoutes.includes(request.nextUrl.pathname)
 	) {
+		await signOut();
 		return NextResponse.redirect(new URL("/home", request.url));
 	}
 	return NextResponse.next();
