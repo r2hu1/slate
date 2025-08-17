@@ -1,6 +1,10 @@
 import { db } from "@/db/client";
 import { documents, folders } from "@/db/schema";
-import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import {
+	createTRPCRouter,
+	premiumProcedure,
+	protectedProcedure,
+} from "@/trpc/init";
 import { desc, eq, inArray } from "drizzle-orm";
 import z from "zod";
 import { documentSchema } from "../schema";
