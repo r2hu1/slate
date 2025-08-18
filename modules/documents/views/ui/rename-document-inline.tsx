@@ -30,8 +30,11 @@ export default function RenameDocumentInline({
 	const router = useRouter();
 	useEffect(() => {
 		if (error) {
-			toast.error(error.message);
 			if (error.message.split(" ").includes("undefined")) {
+				router.push("/");
+			}
+			if (error.message == "UNAUTHORIZED") {
+				toast.error("You are not authorized to view this document.");
 				router.push("/");
 			}
 		}
