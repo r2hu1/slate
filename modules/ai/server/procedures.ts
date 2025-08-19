@@ -170,6 +170,12 @@ export const aiRouter = createTRPCRouter({
 			}),
 		)
 		.mutation(async ({ input, ctx }) => {
+			const isPremium = await isSubscribed();
+			if (!isPremium) {
+				return {
+					text: "Upgrade to premium to use me, or self-host your own slate instance.",
+				};
+			}
 			const memoryContext = `
 		<Memory>
 		<Warning>Always use memory if necessary</Warning>
