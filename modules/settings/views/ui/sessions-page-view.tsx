@@ -36,7 +36,7 @@ export default function SessionsPageView() {
 	return (
 		<div>
 			<SessionPageNav active={"sessions"} />
-			<div className="mb-10 flex items-center justify-between">
+			<div className="mb-10 flex gap-2 items-center justify-between">
 				<div>
 					<h1 className="font-medium text-lg">Active Sessions</h1>
 					<p className="text-sm text-foreground/80">
@@ -53,13 +53,14 @@ export default function SessionsPageView() {
 				</Button>
 			</div>
 			<div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-				{sessions?.map((session) => (
-					<SessionCard
-						key={session.id}
-						session={session}
-						onRevokeCallback={fetchSessions}
-					/>
-				))}
+				{!loading &&
+					sessions?.map((session) => (
+						<SessionCard
+							key={session.id}
+							session={session}
+							onRevokeCallback={fetchSessions}
+						/>
+					))}
 				{loading &&
 					Array.from({ length: 2 }).map(() => (
 						<Skeleton className="col-span-3 h-[280px] w-full" />

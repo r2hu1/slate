@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const tabs = [
 	{ label: "Account", href: "/settings" },
-	{ label: "Subscriptions", href: "/settings/subscriptions" },
+	// { label: "Subscriptions", href: "/settings/subscriptions" },
 	{ label: "Preferences", href: "/settings/preferences" },
 	{ label: "Sessions", href: "/settings/sessions" },
 	{ label: "Danger", href: "/settings/danger" },
