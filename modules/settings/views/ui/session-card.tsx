@@ -68,11 +68,11 @@ export default function SessionCard({
 	};
 
 	return (
-		<Card className="p-0 !h-fit">
+		<Card className="p-0 !h-fit shadow-none hover:shadow-md transition">
 			<CardHeader className="py-3 px-4 !pb-1.5 border-b">
 				<div className="flex items-center justify-between">
 					<CardTitle className="text-lg font-semibold">
-						{parseUserAgent(session.userAgent) || "N/A"}
+						{parseUserAgent(session.userAgent)}
 					</CardTitle>
 					<div className="flex items-center gap-2">
 						<Badge variant={isExpired ? "destructive" : "default"}>

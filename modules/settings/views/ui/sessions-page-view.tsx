@@ -61,8 +61,8 @@ export default function SessionsPageView() {
 					/>
 				))}
 				{loading &&
-					Array.from({ length: 6 }).map(() => (
-						<Skeleton className="h-[280px] w-full" />
+					Array.from({ length: 2 }).map(() => (
+						<Skeleton className="col-span-3 h-[280px] w-full" />
 					))}
 			</div>
 		</div>
