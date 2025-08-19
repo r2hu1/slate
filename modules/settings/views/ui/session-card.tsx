@@ -71,7 +71,9 @@ export default function SessionCard({
 		<Card className="p-0 !h-fit">
 			<CardHeader className="py-3 px-4 !pb-1.5 border-b">
 				<div className="flex items-center justify-between">
-					<CardTitle className="text-lg font-semibold">Session</CardTitle>
+					<CardTitle className="text-lg font-semibold">
+						{parseUserAgent(session.userAgent) || "N/A"}
+					</CardTitle>
 					<div className="flex items-center gap-2">
 						<Badge variant={isExpired ? "destructive" : "default"}>
 							{isExpired ? "Expired" : "Active"}
