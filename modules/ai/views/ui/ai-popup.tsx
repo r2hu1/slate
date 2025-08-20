@@ -24,6 +24,7 @@ import {
 	ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import { Message, MessageContent } from "@/components/ai-elements/message";
+import { Loader } from "@/components/ai-elements/loader";
 
 export default function AiPopup({
 	insert,
@@ -124,6 +125,13 @@ export default function AiPopup({
 								</Message>
 							);
 						})}
+						{isPending && (
+							<Message from="assistant">
+								<MessageContent className="!bg-transparent">
+									<Loader className="h-3.5 w-3.5 animate-spin" />
+								</MessageContent>
+							</Message>
+						)}
 						<ConversationScrollButton />
 					</ConversationContent>
 				</Conversation>
