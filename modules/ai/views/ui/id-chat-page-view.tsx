@@ -7,12 +7,19 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { toast } from "sonner";
 import { UserChatBlock } from "./user-chat-block";
-import { Brain, Copy, Download, FileText } from "lucide-react";
+import { Brain, Copy, Download, FilePlus, FileText } from "lucide-react";
 import Tooltip from "@/components/ui/tooltip-v2";
 import { Button } from "@/components/ui/button";
 import PageLoader from "@/modules/preloader/views/ui/page-loader";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import CreateDocumentWithAiPopup from "./create-document-popup";
+import {
+	Conversation,
+	ConversationContent,
+	ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Message, MessageContent } from "@/components/ai-elements/message";
+import { StreamedMessage } from "./streamed-message";
 
 const thinkingTexts = ["Thinking", "Researching", "Organizing", "Summarizing"];
 
@@ -124,83 +131,94 @@ export default function IdChatPageView({ params }: { params: string }) {
 		);
 	}
 	return (
-		<div className="max-w-3xl mx-auto pb-56">
-			<div className="flex flex-col gap-10">
+		<Conversation className="max-w-3xl mx-auto pb-36">
+			<ConversationContent>
 				{history.map((item, index) => {
 					if (!item.content) return null;
 
 					if (item.role === "ai") {
 						return (
-							<div
-								key={index}
-								className="prose prose-sm max-w-none dark:prose-invert relative group"
-							>
-								<MarkdownContent
-									id={String(index)}
-									key={index}
-									content={item.content
-										.replace(/^```mdx\s*\r?\n/, "")
-										.replace(/```$/, "")}
-								/>
-								<div className="flex gap-2.5 mt-7 items-center justify-start">
-									<Tooltip text="Save as file">
-										<Button
-											onClick={() =>
-												handleSave(
-													item.content
+							<Message from="assistant">
+								<MessageContent className="!max-w-full !bg-transparent p-0">
+									<StreamedMessage
+										content={item.content}
+										index={index}
+										elements={
+											<div className="flex gap-2.5 mt-7 items-center justify-start">
+												<Tooltip text="Save as file">
+													<Button
+														onClick={() =>
+															handleSave(
+																item.content
+																	.replace(/^```mdx\s*\r?\n/, "")
+																	.replace(/```$/, ""),
+															)
+														}
+														size="icon"
+														variant="ghost"
+														className="h-8 w-8"
+													>
+														<Download className="!h-3.5 !w-3.5" />
+													</Button>
+												</Tooltip>
+												<Tooltip text="Copy Response">
+													<Button
+														onClick={() => {
+															navigator.clipboard.writeText(
+																item.content
+																	.replace(/^```mdx\s*\r?\n/, "")
+																	.replace(/```$/, ""),
+															);
+															toast.success("Copied to clipboard");
+														}}
+														size="icon"
+														variant="ghost"
+														className="h-8 w-8"
+													>
+														<Copy className="!h-3.5 !w-3.5" />
+													</Button>
+												</Tooltip>
+												<CreateDocumentWithAiPopup
+													content={item.content
 														.replace(/^```mdx\s*\r?\n/, "")
-														.replace(/```$/, ""),
-												)
-											}
-											size="icon"
-											variant="ghost"
-											className="h-8 w-8"
-										>
-											<Download className="!h-3.5 !w-3.5" />
-										</Button>
-									</Tooltip>
-									<Tooltip text="Copy Response">
-										<Button
-											onClick={() => {
-												navigator.clipboard.writeText(
-													item.content
-														.replace(/^```mdx\s*\r?\n/, "")
-														.replace(/```$/, ""),
-												);
-												toast.success("Copied to clipboard");
-											}}
-											size="icon"
-											variant="ghost"
-											className="h-8 w-8"
-										>
-											<Copy className="!h-3.5 !w-3.5" />
-										</Button>
-									</Tooltip>
-									<CreateDocumentWithAiPopup
-										content={item.content
-											.replace(/^```mdx\s*\r?\n/, "")
-											.replace(/```$/, "")}
-										title={historyData?.title || ""}
-									>
-										<Button size="sm">Create Document</Button>
-									</CreateDocumentWithAiPopup>
-								</div>
-							</div>
+														.replace(/```$/, "")}
+													title={historyData?.title || ""}
+												>
+													<Button size="sm" variant="outline">
+														New Document <FilePlus className="!h-3.5 !w-3.5" />
+													</Button>
+												</CreateDocumentWithAiPopup>
+											</div>
+										}
+									/>
+								</MessageContent>
+							</Message>
 						);
 					}
 
-					return <UserChatBlock key={index} text={item.content} />;
+					return (
+						<Message from="user">
+							<MessageContent className="p-2.5 px-3.5">
+								{item.content}
+							</MessageContent>
+						</Message>
+					);
 				})}
 
 				{isPending && (
-					<div className="flex items-center gap-2 animate-pulse">
-						<Brain className="!h-3.5 !w-3.5" />
-						<p className="text-sm text-foreground/80">
-							{thinkingTexts[aiThinkingIndex]}
-						</p>
-					</div>
+					<Message from="assistant">
+						<MessageContent className="!bg-transparent">
+							<div className="flex items-center gap-2 animate-pulse">
+								<Brain className="!h-3.5 !w-3.5" />
+								<p className="text-sm text-foreground/80">
+									{thinkingTexts[aiThinkingIndex]}
+								</p>
+							</div>
+						</MessageContent>
+					</Message>
 				)}
-			</div>
-		</div>
+				<ConversationScrollButton />
+			</ConversationContent>
+		</Conversation>
 	);
 }
