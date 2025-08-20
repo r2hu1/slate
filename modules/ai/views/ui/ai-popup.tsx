@@ -14,10 +14,10 @@ import useAutoResizeTextarea from "@/hooks/use-auto-resize-textarea";
 import { useState } from "react";
 import { UserChatBlock } from "./user-chat-block";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { MarkdownContent } from "@/components/ui/markdown-content";
 import { useMutation } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { toast } from "sonner";
+import { StreamedMessage } from "./streamed-message";
 
 export default function AiPopup({
 	insert,
@@ -97,36 +97,15 @@ export default function AiPopup({
 					<div className="grid gap-6 px-4">
 						{history.map((item, index) => {
 							if (!item.content) return null;
-
 							if (item.role === "ai") {
 								return (
-									<div
+									<StreamedMessage
 										key={index}
-										className="prose prose-sm max-w-none dark:prose-invert relative group"
-									>
-										<MarkdownContent
-											id={String(index)}
-											key={index}
-											content={item.content
-												.replace(/^```mdx\s*\r?\n/, "")
-												.replace(/```$/, "")}
-										/>
-										<div className="flex gap-2.5 items-center justify-start">
-											<Button
-												size="icon"
-												onClick={() => {
-													navigator.clipboard.writeText(item.content);
-												}}
-												variant="ghost"
-												className="h-8 w-8"
-											>
-												<Copy className="!h-3.5 !w-3.5" />
-											</Button>
-										</div>
-									</div>
+										index={index}
+										content={item.content}
+									/>
 								);
 							}
-
 							return (
 								<div className="scale-95" key={index}>
 									<UserChatBlock showToolbar={false} text={item.content} />
