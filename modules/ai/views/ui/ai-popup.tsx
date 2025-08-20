@@ -18,6 +18,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { toast } from "sonner";
 import { StreamedMessage } from "./streamed-message";
+import {
+	Conversation,
+	ConversationContent,
+	ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Message, MessageContent } from "@/components/ai-elements/message";
 
 export default function AiPopup({
 	insert,
@@ -93,33 +99,34 @@ export default function AiPopup({
 					<SheetTitle>Slate AI</SheetTitle>
 					<SheetDescription>Ask me anything you want!</SheetDescription>
 				</SheetHeader>
-				<ScrollArea className="max-h-[calc(100%-250px)]">
-					<div className="grid gap-6 px-4">
+				<Conversation className="max-h-[calc(100%-220px)] -mt-4">
+					<ConversationContent>
 						{history.map((item, index) => {
 							if (!item.content) return null;
 							if (item.role === "ai") {
 								return (
-									<StreamedMessage
-										key={index}
-										index={index}
-										content={item.content}
-									/>
+									<Message from="assistant">
+										<MessageContent className="!bg-sidebar">
+											<StreamedMessage
+												key={index}
+												index={index}
+												content={item.content}
+											/>
+										</MessageContent>
+									</Message>
 								);
 							}
 							return (
-								<div className="scale-95" key={index}>
-									<UserChatBlock showToolbar={false} text={item.content} />
-								</div>
+								<Message from="user">
+									<MessageContent className="p-2.5 px-3.5">
+										{item.content}
+									</MessageContent>
+								</Message>
 							);
 						})}
-					</div>
-					{isPending && (
-						<span className="px-6 animate-pulse text-sm text-foreground/80">
-							Thinking...
-						</span>
-					)}
-					<ScrollBar />
-				</ScrollArea>
+						<ConversationScrollButton />
+					</ConversationContent>
+				</Conversation>
 				<div className="absolute bottom-4 left-0 right-0 w-full px-4">
 					<div className="relative pb-2 bg-sidebar dark:bg-card border rounded-xl">
 						<Textarea
