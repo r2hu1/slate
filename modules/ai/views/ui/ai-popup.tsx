@@ -49,10 +49,6 @@ export default function AiPopup({
 	);
 
 	const mutateFn = () => {
-		console.log(
-			history[history.length - 1]?.role == "ai" &&
-				history[history.length - 1]?.content.slice(-300),
-		);
 		mutate(
 			{
 				content: value,
@@ -113,7 +109,7 @@ export default function AiPopup({
 							if (!item.content) return null;
 							if (item.role === "ai") {
 								return (
-									<Message from="assistant">
+									<Message from="assistant" key={index}>
 										<MessageContent className="!bg-sidebar !text-sidebar-foreground">
 											<StreamedMessage
 												key={index}
@@ -125,7 +121,7 @@ export default function AiPopup({
 								);
 							}
 							return (
-								<Message from="user">
+								<Message from="user" key={index}>
 									<MessageContent className="p-2.5 px-3.5">
 										{item.content}
 									</MessageContent>
