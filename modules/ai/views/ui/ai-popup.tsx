@@ -44,12 +44,24 @@ export default function AiPopup({
 		trpc.ai.documentAiChatCreate.mutationOptions(),
 	);
 
+	const [history, setHistory] = useState<{ role: string; content: string }[]>(
+		[],
+	);
+
 	const mutateFn = () => {
+		console.log(
+			history[history.length - 1]?.role == "ai" &&
+				history[history.length - 1]?.content.slice(-300),
+		);
 		mutate(
 			{
 				content: value,
 				title: title || "",
 				lastEditedDocContent: lastEdited.toString(),
+				previous:
+					(history[history.length - 1]?.role == "ai" &&
+						history[history.length - 1]?.content.slice(-300)) ||
+					"N/A",
 			},
 			{
 				onSuccess: (data) => {
@@ -63,10 +75,6 @@ export default function AiPopup({
 			},
 		);
 	};
-
-	const [history, setHistory] = useState<{ role: string; content: string }[]>(
-		[],
-	);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 		if (e.key === "Enter" && !e.shiftKey) {
