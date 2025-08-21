@@ -22,20 +22,24 @@ Initially, I thought—why not build something inspired by Notion, rather than r
   File system-style document management
 * **Documents**
   Pages where you write and structure your content
+* **AI Chatbot**
+  Interact with AI-powered chatbot chat, build or research
 * **Create document with AI**
   Create a document using AI
+* **Search Across Workspaces**
+  Quickly find any document, folder, chat history, quick actions and more across workspaces
+* **AI Autocomplete** *(like Copilot)*
+  Inline suggestions while you're typing in editor
+* **AI for document as sidebar**
+  Get help, modify, and enhance your document with AI in the sidebar of our document/editor
 * **AI for Everything**
   AI that writes, creates, fixes, and enhances your content
 * **Realtime Updates**
-  Creating or editing folders/documents reflects live in the UI wherever relevant
-* **Search Across Workspaces**
-  Quickly find any document, regardless of where it's stored
-* **Document Sharing**
-  Share documents securely with others
+  Doing any actions reflects live in the UI wherever relevant
+* **Sharing**
+  Share documents, folders and chats securely with others
 * **Rich Text Editor**
   Fully-featured editor with formatting, embeds, and more
-* **AI Autocomplete** *(like Copilot)*
-  Inline suggestions while you're typing
 * **And more...**
   Expect continuous improvements and new features
 
@@ -43,43 +47,47 @@ Initially, I thought—why not build something inspired by Notion, rather than r
 ## 🧱 Tech Stack
 
 * **Next.js**
+  The full-stack react framework
 * **tRPC**
   Type-safe API layer — a powerful alternative to REST/fetch
 * **Postgres (via Xata)**
-  [xata.io](https://lite.xata.io) — free plan includes 15GB of storage
+  [lite.xata.io](https://lite.xata.io) — free plan includes 15GB of storage not sponsored)
 * **Drizzle ORM**
 * **AI SDK**
   For streaming responses, context-aware AI, etc.
 * **Nodemailer**
-  Used for email notifications
+  Used for sending emails for free
 * **Tailwind CSS**
   Utility-first styling
 * **shadcn/ui**
   Component system for consistent UI
 * **Polar SDK**
-  A Stripe wrapper built for developers — handles programmatic payments
+  A Stripe wrapper built for developers
 * **Better Auth**
   Auth system compatible with Polar SDK
 
-
 ## 🛠️ Setup Locally
 
-To run the project locally, you'll need to configure a few things in your **Google Cloud Console** and **GitHub Apps**:
+To run the project locally, you'll need to have api/secret keys of the following:
 
-1. **Create a Google Cloud Project** *(skip if you already have one)*
-2. **Create an OAuth client** in Google Cloud
-3. **Create a GitHub App**
+1. **Google Cloud Project** *(skip if you already have one)*
+2. **OAuth client** in Google Cloud
+3. **GitHub App**
+4. **Postgress database**
+5. **Gemini ai**
 
 Once done, copy the values into your local `.env` file:
 
 * Use `.env.example` as a reference
 * Rename it to `.env` and fill in the required variables
 
-## 📝 Self deploy
+## 📝 Self-hosting for personal use
 
 For self-hosting, there's a dedicated branch where I've removed all payment integrations (Stripe/Polar) so you can access all features without restrictions.
 
-* [Self-hosting branch](https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
+ [![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
+
+* [View the Self-hosting branch](https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
 
 ## ▶️ Run the Project
 
