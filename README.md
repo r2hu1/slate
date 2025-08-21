@@ -81,14 +81,6 @@ Once done, copy the values into your local `.env` file:
 * Use `.env.example` as a reference
 * Rename it to `.env` and fill in the required variables
 
-## 📝 Self-hosting for personal use
-
-For self-hosting, there's a dedicated branch where I've removed all payment integrations (Stripe/Polar) so you can access all features without restrictions.
-
- [![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
-
-* [View the Self-hosting branch](https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
-
 ## ▶️ Run the Project
 
 After setting up your environment variables, install the dependencies:
@@ -108,6 +100,14 @@ npm run dev
 ```
 
 Once running, open [http://localhost:3000](http://localhost:3000) in your browser 🚀
+
+## 📝 Self-hosting for personal use
+
+For self-hosting, there's a dedicated branch where I've removed all payment integrations (Stripe/Polar) so you can access all features without restrictions.
+
+ [![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
+
+* [View the Self-hosting branch](https://github.com/r2hu1/slate/tree/without-payments-for-selfhost)
 
 
 ## 🤝 Contribution
